@@ -27,7 +27,7 @@ async function initDB() {
 
 const origin = (process.env.FRONTEND_URL || '').replace(/\/+$/, '') || 'http://localhost:5500';
 app.use(cors({
-  origin(o, cb) { if (!o || o === origin) cb(null, true); else cb(new Error('CORS blocked')); },
+  origin: true,
   credentials: true,
 }));
 app.use(express.json());
