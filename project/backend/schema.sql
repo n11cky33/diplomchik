@@ -1,19 +1,4 @@
--- ================================================================
---  La Maison — схема базы данных (3НФ, 7 таблиц)
---  MySQL 8+  |  utf8mb4
--- ================================================================
 
-CREATE DATABASE IF NOT EXISTS restaurant_db
-  CHARACTER SET utf8mb4
-  COLLATE utf8mb4_unicode_ci;
-
-USE restaurant_db;
-
--- ----------------------------------------------------------------
---  1. table_zones — зоны / залы ресторана
---     Выделена отдельно по 3НФ: название зоны функционально
---     зависит только от zone_id, а не от стола.
--- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS table_zones (
   zone_id     INT          AUTO_INCREMENT PRIMARY KEY,
   zone_name   VARCHAR(100) NOT NULL,
