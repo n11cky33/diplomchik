@@ -612,7 +612,7 @@ footer{background:var(--d2);border-top:1px solid var(--border);padding:40px 0 24
         <div class="fgrid">
           <div class="fld full" id="fld-email">
             <label>Электронная почта *</label>
-            <input type="email" id="f-email" placeholder="mail@example.com" autocomplete="email" oninput="validateEmail()"/>
+            <input type="email" id="f-email" placeholder="mail@example.com" autocomplete="email" oninput="validateEmail()"  pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"/>
             <span class="field-err">Введите корректный email (например: ivan@mail.ru)</span>
             <span class="field-ok" id="email-ok-msg">✓ Email подтверждён</span>
           </div>
