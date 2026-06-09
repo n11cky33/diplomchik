@@ -318,6 +318,20 @@ footer{background:var(--d2);border-top:1px solid var(--border);padding:40px 0 24
 .lightbox-close{position:absolute;top:20px;right:24px;font-size:32px;
   color:var(--text2);cursor:pointer;transition:.2s;line-height:1}
 .lightbox-close:hover{color:var(--text)}
+  .qr-block{display:none;margin:20px 0;padding:20px 24px;
+  background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.3);
+  border-radius:10px;text-align:center}
+.qr-block-title{font-size:15px;font-weight:700;color:var(--gold);margin-bottom:6px}
+.qr-block-sub{font-size:13px;color:var(--text2);margin-bottom:18px;line-height:1.6}
+.qr-icon{display:inline-block;margin:0 auto 12px}
+.qr-contact{font-size:13px;color:var(--text2);margin-top:12px}
+.qr-contact b{color:var(--text)}
+/* Success QR */
+.success-qr{display:none;margin:16px auto 20px;padding:18px 22px;
+  background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.3);
+  border-radius:10px;max-width:420px}
+.success-qr-title{font-size:14px;font-weight:700;color:var(--gold);margin-bottom:6px}
+.success-qr-sub{font-size:13px;color:var(--text2);line-height:1.5}
 </style>
 </head>
 <body>
@@ -895,20 +909,7 @@ function showSuccess(){
 
 
 /* ── QR PREPAYMENT ── */
-.qr-block{display:none;margin:20px 0;padding:20px 24px;
-  background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.3);
-  border-radius:10px;text-align:center}
-.qr-block-title{font-size:15px;font-weight:700;color:var(--gold);margin-bottom:6px}
-.qr-block-sub{font-size:13px;color:var(--text2);margin-bottom:18px;line-height:1.6}
-.qr-icon{display:inline-block;margin:0 auto 12px}
-.qr-contact{font-size:13px;color:var(--text2);margin-top:12px}
-.qr-contact b{color:var(--text)}
-/* Success QR */
-.success-qr{display:none;margin:16px auto 20px;padding:18px 22px;
-  background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.3);
-  border-radius:10px;max-width:420px}
-.success-qr-title{font-size:14px;font-weight:700;color:var(--gold);margin-bottom:6px}
-.success-qr-sub{font-size:13px;color:var(--text2);line-height:1.5}
+
 
 /* ── MSG ── */
 function showMsg(id,t,c){var m=document.getElementById(id);m.textContent=t;m.className='msg '+c;m.style.display='block';}
