@@ -83,36 +83,14 @@ section{padding:90px 0}
 @media(max-width:640px){.container{padding:0 16px}}
 .sec-tag{font-size:11px;color:var(--gold);letter-spacing:4px;
   text-transform:uppercase;margin-bottom:10px;display:block}
-.sec-title{
-  font-size:clamp(26px,7vw,40px);;font-family:Georgia,serif;
+.sec-title{font-size:clamp(26px,4vw,40px);font-family:Georgia,serif;
   color:var(--text);margin-bottom:12px;line-height:1.2}
 .sec-sub{color:var(--text2);font-size:16px;line-height:1.7;max-width:560px}
 .divider{width:48px;height:2px;background:var(--gold);margin:16px 0 32px;opacity:.7}
 
 /* ── ABOUT ── */
 #about{background:var(--dark)}
-@media(max-width:768px){
-
-  .about-grid{
-    grid-template-columns:1fr;
-    gap:30px;
-  }
-
-  .sec-title{
-    font-size:42px;
-    line-height:1.1;
-  }
-
-  .sec-sub,
-  #about p{
-    max-width:100%;
-  }
-
-  .about-features{
-    grid-template-columns:1fr;
-  }
-
-}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
 @media(max-width:768px){.about-grid{grid-template-columns:1fr;gap:36px}}
 .about-img-wrap{position:relative}
 .about-img{width:100%;aspect-ratio:4/3;object-fit:cover;
@@ -340,45 +318,6 @@ footer{background:var(--d2);border-top:1px solid var(--border);padding:40px 0 24
 .lightbox-close{position:absolute;top:20px;right:24px;font-size:32px;
   color:var(--text2);cursor:pointer;transition:.2s;line-height:1}
 .lightbox-close:hover{color:var(--text)}
-  img{
-  max-width:100%;
-  height:auto;
-}
-
-html,body{
-  overflow-x:hidden;
-}
-
-.hall-svg-wrap{
-  background:#060911;
-  padding:10px;
-  overflow-x:auto;
-  overflow-y:hidden;
-}
-
-@media(max-width:480px){
-
-  .btn-primary,
-  .btn-secondary,
-  .btn{
-    width:100%;
-    padding:14px 18px;
-    text-align:center;
-  }
-
-  .hero-btns,
-  .btns{
-    flex-direction:column;
-  }
-
-  .hall-svg-wrap{
-    padding:4px;
-  }
-
-  #hall-svg{
-    min-width:760px;
-  }
-}
 </style>
 </head>
 <body>
@@ -432,7 +371,7 @@ html,body{
   <div class="container">
     <div class="about-grid">
       <div class="about-img-wrap">
-        <img class="about-img" src="https://imgs.search.brave.com/BVx_6WJOQCRn5HqB7ncTSq5rVpWbtVG_cav9-EQsEgE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zY2Ru/LnRvbWVzdG8ucnUv/aW1nL3BsYWNlLzAw/MC8wMjIvNjE3L3Jl/c3RvcmFuLXNlbGZp/ZS1zZWxmaS1uYS1u/b3ZpbnNrb20tYnVs/dmFyZV8zYjliM19m/dWxsLTQzOTQwNi5q/cGc" alt="Интерьер ресторана La Maison" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;display:block;background:#161b22"/>
+<img class="about-img" src="https://imgs.search.brave.com/BVx_6WJOQCRn5HqB7ncTSq5rVpWbtVG_cav9-EQsEgE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zY2Ru/LnRvbWVzdG8ucnUv/aW1nL3BsYWNlLzAw/MC8wMjIvNjE3L3Jl/c3RvcmFuLXNlbGZp/ZS1zZWxmaS1uYS1u/b3ZpbnNrb20tYnVs/dmFyZV8zYjliM19m/dWxsLTQzOTQwNi5q/cGc" alt="Интерьер ресторана La Maison" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;display:block;background:#161b22"/>
         <div class="about-img-accent">
           <div class="about-img-accent-num">#1</div>
           <div class="about-img-accent-txt">Ресторан по версии Kazan Food Guide 2024</div>
@@ -711,6 +650,77 @@ html,body{
           <div class="conf-row" id="c-req-row" style="display:none"><span class="conf-k">Пожелания</span><span class="conf-v" id="c-req">—</span></div>
         </div>
         <div class="conf-note">После подтверждения администратор свяжется с вами по указанному телефону</div>
+        <!-- QR prepayment block (shown when guests >= 10) -->
+        <div class="qr-block" id="qr-block">
+          <div class="qr-block-title">Требуется предоплата</div>
+          <div class="qr-block-sub">При бронировании от 10 гостей необходима предоплата.<br>
+          Отсканируйте QR-код или свяжитесь с нами по телефону.</div>
+          <div class="qr-icon">
+            <svg width="110" height="110" viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- QR decorative icon -->
+              <rect x="1" y="1" width="108" height="108" rx="8" fill="none" stroke="rgba(201,168,76,.4)" stroke-width="1.5"/>
+              <!-- Top-left finder -->
+              <rect x="8" y="8" width="30" height="30" rx="2" fill="none" stroke="#c9a84c" stroke-width="2"/>
+              <rect x="13" y="13" width="20" height="20" rx="1" fill="rgba(201,168,76,.15)"/>
+              <rect x="17" y="17" width="12" height="12" rx="1" fill="#c9a84c" opacity="0.7"/>
+              <!-- Top-right finder -->
+              <rect x="72" y="8" width="30" height="30" rx="2" fill="none" stroke="#c9a84c" stroke-width="2"/>
+              <rect x="77" y="13" width="20" height="20" rx="1" fill="rgba(201,168,76,.15)"/>
+              <rect x="81" y="17" width="12" height="12" rx="1" fill="#c9a84c" opacity="0.7"/>
+              <!-- Bottom-left finder -->
+              <rect x="8" y="72" width="30" height="30" rx="2" fill="none" stroke="#c9a84c" stroke-width="2"/>
+              <rect x="13" y="77" width="20" height="20" rx="1" fill="rgba(201,168,76,.15)"/>
+              <rect x="17" y="81" width="12" height="12" rx="1" fill="#c9a84c" opacity="0.7"/>
+              <!-- Data cells pattern (decorative) -->
+              <rect x="48" y="8" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.5"/>
+              <rect x="56" y="8" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.3"/>
+              <rect x="48" y="16" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.3"/>
+              <rect x="56" y="16" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.6"/>
+              <rect x="64" y="16" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.4"/>
+              <rect x="48" y="24" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.5"/>
+              <rect x="64" y="24" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.5"/>
+              <rect x="8" y="48" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.4"/>
+              <rect x="16" y="48" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.6"/>
+              <rect x="24" y="48" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.3"/>
+              <rect x="8" y="56" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.6"/>
+              <rect x="24" y="56" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.4"/>
+              <rect x="8" y="64" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.3"/>
+              <rect x="16" y="64" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.5"/>
+              <rect x="24" y="64" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.6"/>
+              <rect x="48" y="48" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.7"/>
+              <rect x="56" y="48" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.3"/>
+              <rect x="64" y="48" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.5"/>
+              <rect x="72" y="48" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.4"/>
+              <rect x="80" y="48" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.6"/>
+              <rect x="96" y="48" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.4"/>
+              <rect x="48" y="56" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.4"/>
+              <rect x="64" y="56" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.6"/>
+              <rect x="80" y="56" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.3"/>
+              <rect x="96" y="56" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.5"/>
+              <rect x="48" y="64" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.5"/>
+              <rect x="56" y="64" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.4"/>
+              <rect x="72" y="64" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.6"/>
+              <rect x="88" y="64" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.3"/>
+              <rect x="48" y="72" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.4"/>
+              <rect x="64" y="72" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.5"/>
+              <rect x="80" y="72" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.6"/>
+              <rect x="96" y="72" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.3"/>
+              <rect x="56" y="80" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.5"/>
+              <rect x="72" y="80" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.4"/>
+              <rect x="88" y="80" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.6"/>
+              <rect x="48" y="88" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.3"/>
+              <rect x="64" y="88" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.5"/>
+              <rect x="80" y="88" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.4"/>
+              <rect x="96" y="88" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.6"/>
+              <rect x="56" y="96" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.4"/>
+              <rect x="72" y="96" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.6"/>
+              <rect x="88" y="96" width="6" height="6" rx="1" fill="#c9a84c" opacity="0.3"/>
+            </svg>
+          </div>
+          <div class="qr-contact">
+            По вопросам предоплаты: <b>+7 (843) 200-10-20</b>
+          </div>
+        </div>
         <div class="btns">
           <button class="btn btn-out" id="btn-back3">← Изменить данные</button>
           <button class="btn btn-gold" id="btn-submit">Подтвердить бронирование</button>
@@ -725,6 +735,13 @@ html,body{
         <div class="success-icon">✓</div>
         <div class="success-title">Стол успешно забронирован!</div>
         <div class="success-num" id="success-num">Бронь №—</div>
+        <div class="success-qr" id="success-qr">
+          <div class="success-qr-title">Не забудьте про предоплату</div>
+          <div class="success-qr-sub">
+            При бронировании от 10 гостей требуется предоплата.<br>
+            Свяжитесь с нами: <b style="color:var(--text)">+7 (843) 200-10-20</b>
+          </div>
+        </div>
         <div class="success-sub">Ваша заявка принята. Администратор свяжется с вами в течение 30 минут для подтверждения. Проверьте электронную почту.</div>
         <button class="btn btn-primary" id="btn-new" style="margin:0 auto">Оформить ещё одно бронирование</button>
       </div>
@@ -875,6 +892,23 @@ function showSuccess(){
   document.getElementById('step-success').style.display='block';
   setTimeout(function(){document.getElementById('step-success').scrollIntoView({behavior:'smooth'});},60);
 }
+
+
+/* ── QR PREPAYMENT ── */
+.qr-block{display:none;margin:20px 0;padding:20px 24px;
+  background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.3);
+  border-radius:10px;text-align:center}
+.qr-block-title{font-size:15px;font-weight:700;color:var(--gold);margin-bottom:6px}
+.qr-block-sub{font-size:13px;color:var(--text2);margin-bottom:18px;line-height:1.6}
+.qr-icon{display:inline-block;margin:0 auto 12px}
+.qr-contact{font-size:13px;color:var(--text2);margin-top:12px}
+.qr-contact b{color:var(--text)}
+/* Success QR */
+.success-qr{display:none;margin:16px auto 20px;padding:18px 22px;
+  background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.3);
+  border-radius:10px;max-width:420px}
+.success-qr-title{font-size:14px;font-weight:700;color:var(--gold);margin-bottom:6px}
+.success-qr-sub{font-size:13px;color:var(--text2);line-height:1.5}
 
 /* ── MSG ── */
 function showMsg(id,t,c){var m=document.getElementById(id);m.textContent=t;m.className='msg '+c;m.style.display='block';}
@@ -1119,6 +1153,9 @@ document.getElementById('btn-next3').addEventListener('click',function(){
   document.getElementById('c-time').textContent=S.time;
   document.getElementById('c-dur').textContent=dmap[S.duration]||S.duration+' мин';
   document.getElementById('c-guests').textContent=S.guests+' чел.';
+  // Show QR block if 10+ guests
+  var qrBlock=document.getElementById('qr-block');
+  if(S.guests>=10){qrBlock.style.display='block';}else{qrBlock.style.display='none';}
   document.getElementById('c-name').textContent=S.name;
   document.getElementById('c-phone').textContent=S.phone;
   document.getElementById('c-email').textContent=S.email;
@@ -1138,7 +1175,13 @@ document.getElementById('btn-submit').addEventListener('click',function(){
     full_name:S.name,phone:S.phone,email:S.email,special_request:S.req
   })}).then(function(d){
     btn.disabled=false;btn.textContent='Подтвердить бронирование';
-    if(d.success){document.getElementById('success-num').textContent='Бронь №'+d.reservation_id;showSuccess();}
+    if(d.success){
+      document.getElementById('success-num').textContent='Бронь №'+d.reservation_id;
+      // Show QR on success if 10+ guests
+      var sqr=document.getElementById('success-qr');
+      if(S.guests>=10){sqr.style.display='block';}else{sqr.style.display='none';}
+      showSuccess();
+    }
     else showMsg('msg4',d.message||'Ошибка при создании брони','err');
   }).catch(function(){
     btn.disabled=false;btn.textContent='Подтвердить бронирование';
@@ -1151,6 +1194,8 @@ document.getElementById('btn-new').addEventListener('click',function(){
   ['f-name','f-phone','f-email','f-req'].forEach(function(id){document.getElementById(id).value='';});
   ['fld-email','fld-name','fld-phone'].forEach(function(id){setFieldState(id,'');});
   document.getElementById('step-success').style.display='none';
+  document.getElementById('success-qr').style.display='none';
+  document.getElementById('qr-block').style.display='none';
   var di2=document.getElementById('r-date');
   di2.value=new Date().toISOString().split('T')[0];
   setStep(1);
