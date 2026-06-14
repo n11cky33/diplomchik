@@ -605,14 +605,14 @@ footer{background:var(--d2);border-top:1px solid var(--border);padding:40px 0 24
     </div>
 
     <!-- STEP 3 -->
-    <div id="step3" style="display:none">
+ <div id="step3" style="display:none">
       <div class="bcard">
         <div class="bcard-title">Ваши контактные данные</div>
         <div class="bcard-sub">Заполните форму. Если вы уже бывали у нас — введите email и данные подставятся автоматически.</div>
         <div class="fgrid">
           <div class="fld full" id="fld-email">
             <label>Электронная почта *</label>
-            <input type="email" id="f-email" placeholder="mail@example.com" autocomplete="email" oninput="validateEmail()"  pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"/>
+            <input type="email" id="f-email" placeholder="mail@example.com" autocomplete="email" oninput="validateEmail()"/>
             <span class="field-err">Введите корректный email (например: ivan@mail.ru)</span>
             <span class="field-ok" id="email-ok-msg">✓ Email подтверждён</span>
           </div>
@@ -623,7 +623,7 @@ footer{background:var(--d2);border-top:1px solid var(--border);padding:40px 0 24
           </div>
           <div class="fld" id="fld-phone">
             <label>Номер телефона *</label>
-            <input type="tel" id="f-phone" placeholder="+7 (900) 000-00-00" autocomplete="tel" oninput="validatePhone()" onkeydown="phoneKeydown(event)"/>
+            <input type="tel" id="f-phone" placeholder="+7 (900) 000-00-00" maxlength="18" autocomplete="tel" oninput="formatPhone(this);validatePhone()" onkeydown="phoneKeydown(event)"/>
             <span class="field-err">Введите корректный номер (+7XXXXXXXXXX)</span>
             <span class="fld-hint">Формат: +7 (999) 999-99-99</span>
           </div>
