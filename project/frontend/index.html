@@ -922,10 +922,39 @@ function setFieldState(fldId,state){
   if(state) el.classList.add(state);
 }
 function validateEmail(){
-  var v=document.getElementById('f-email').value.trim();
-  var ok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-  setFieldState('fld-email',v?ok?'success':'error':'');
-  document.getElementById('email-ok-msg').textContent=ok?'✓ Email корректен':'';
+  var v=document.getElementById('f-email').value.trim().toLowerCase();
+  var hint=document.getElementById('email-ok-msg');
+  // Allowed domains (popular RU + international)
+  var allowed=['gmail.com','mail.ru','yandex.ru','yandex.com','ya.ru',
+    'rambler.ru','inbox.ru','list.ru','bk.ru','internet.ru','icloud.com',
+    'me.com','mac.com','outlook.com','hotmail.com','live.ru','live.com',
+    'yahoo.com','proton.me','protonmail.com','vk.com','k.ru','ro.ru',
+    'myrambler.ru','autorambler.ru'];
+  var ok=false;
+  var errMsg='';
+  if(!v){ hint.textContent=''; setFieldState('fld-email',''); return false; }
+  // Basic format check
+  var parts=v.split('@');
+  if(parts.length!==2){ errMsg='Введите корректный email (нет символа @)'; }
+  else if(/[а-яё]/.test(v)){ errMsg='Email должен быть написан латинскими буквами'; }
+  else {
+    var local=parts[0], domain=parts[1];
+    if(!local){ errMsg='Введите имя до @'; }
+    else if(!domain){ errMsg='Введите домен после @'; }
+    else if(allowed.indexOf(domain)===-1){
+      errMsg='Используйте популярный почтовый сервис: gmail.com, mail.ru, yandex.ru, outlook.com и др.';
+    } else if(!/^[a-z0-9._%+\-]+$/.test(local)){
+      errMsg='Имя почты содержит недопустимые символы';
+    } else {
+      ok=true;
+    }
+  }
+  setFieldState('fld-email', ok?'success':'error');
+  if(ok){
+    hint.textContent='✓ Email подтверждён'; hint.style.color='#4ade80';
+  } else {
+    hint.textContent=errMsg; hint.style.color='#f87171';
+  }
   if(ok){
     clearTimeout(window._emailT);
     window._emailT=setTimeout(function(){
@@ -933,7 +962,7 @@ function validateEmail(){
         if(d.success&&d.customer){
           if(!document.getElementById('f-name').value) document.getElementById('f-name').value=d.customer.full_name||'';
           if(!document.getElementById('f-phone').value) document.getElementById('f-phone').value=d.customer.phone||'';
-          document.getElementById('email-ok-msg').textContent='✓ Данные из предыдущего бронирования подставлены';
+          hint.textContent='✓ Данные из предыдущего бронирования подставлены';
           validateName();validatePhone();
         }
       }).catch(function(){});
@@ -943,15 +972,61 @@ function validateEmail(){
 }
 function validateName(){
   var v=document.getElementById('f-name').value.trim();
-  var ok=v.length>=3;
+  // Must be >= 5 chars, only letters (Cyrillic or Latin), spaces and hyphens — no digits/symbols
+  var onlyLetters=/^[а-яёА-ЯЁa-zA-Z\s\-]+$/.test(v);
+  var hasTwoWords=v.trim().split(/\s+/).length>=2;  // at least first + last name
+  var ok=v.length>=5 && onlyLetters && hasTwoWords;
   setFieldState('fld-name',v?ok?'success':'error':'');
+  // Inline error hint
+  var errEl=document.querySelector('#fld-name .field-err');
+  if(errEl){
+    if(v && !ok){
+      if(!onlyLetters) errEl.textContent='Имя должно содержать только буквы (без цифр и символов)';
+      else if(!hasTwoWords) errEl.textContent='Введите фамилию и имя через пробел';
+      else errEl.textContent='Имя слишком короткое (минимум 5 символов)';
+    } else {
+      errEl.textContent='Введите фамилию и имя (минимум 3 символа)';
+    }
+  }
   return ok;
 }
 function validatePhone(){
-  var v=document.getElementById('f-phone').value.replace(/\D/g,'');
-  var ok=(v.length===11&&(v[0]==='7'||v[0]==='8'))||(v.length===10);
-  setFieldState('fld-phone',document.getElementById('f-phone').value?ok?'success':'error':'');
+  var raw=document.getElementById('f-phone').value.trim();
+  var digits=raw.replace(/\D/g,'');
+  var ok=false;
+  var errEl=document.querySelector('#fld-phone .field-err');
+  var errMsg='';
+  if(!raw){ setFieldState('fld-phone',''); return false; }
+  // Must be exactly 11 digits starting with 7 (or +7 entered)
+  if(digits.length===11 && digits[0]==='7' && digits[1]==='9'){
+    ok=true;
+  } else if(digits.length===10 && digits[0]==='9'){
+    // auto-prepend 7
+    ok=true;
+  } else {
+    if(digits.length<11) errMsg='Номер слишком короткий. Формат: +7 (9XX) XXX-XX-XX';
+    else if(digits.length>11) errMsg='Номер слишком длинный';
+    else if(digits[0]!=='7') errMsg='Номер должен начинаться с +7';
+    else if(digits[1]!=='9') errMsg='После +7 должна идти цифра 9 (пример: +7 900 000-00-00)';
+    else errMsg='Введите корректный российский номер: +7 (9XX) XXX-XX-XX';
+  }
+  setFieldState('fld-phone', ok?'success':'error');
+  if(errEl) errEl.textContent=errMsg||'Формат: +7 (9XX) XXX-XX-XX';
   return ok;
+}
+function formatPhone(inp){
+  var v=inp.value.replace(/\D/g,'');
+  if(!v){inp.value='';return;}
+  // If starts with 8 or 7, replace with +7
+  if(v[0]==='8') v='7'+v.slice(1);
+  if(v[0]==='9') v='7'+v;
+  v=v.slice(0,11);
+  var out='+7';
+  if(v.length>1) out+=' ('+v.slice(1,4);
+  if(v.length>=4) out+=') '+v.slice(4,7);
+  if(v.length>=7) out+='-'+v.slice(7,9);
+  if(v.length>=9) out+='-'+v.slice(9,11);
+  inp.value=out;
 }
 function phoneKeydown(e){
   var inp=document.getElementById('f-phone');
